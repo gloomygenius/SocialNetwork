@@ -1,0 +1,6 @@
+rootProject.name = 'SocialNetwork'
+
+include 'core',
+        'jdbc',
+        'xml',
+        'servlets'
