@@ -3,9 +3,7 @@ package com.social_network.jdbc.connection_pool;
 
 import lombok.Getter;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -97,6 +95,28 @@ public class ConnectionPool {
                 connection.commit();
             }
             ((PooledConnection) connection).reallyClose();
+        }
+    }
+
+    public void initSqlData(String pathToInitSQL) throws ConnectionPoolException {
+        File file = new File(pathToInitSQL);
+        char[] buf = new char[(int) file.length()];
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+            //noinspection ResultOfMethodCallIgnored
+            reader.read(buf);
+        } catch (IOException e) {
+            throw new ConnectionPoolException("Init SQL script error", e);
+        }
+        String[] initState = new String(buf).split(";");
+        // TODO: 29.10.2016 отрефакторить
+        Connection connection = instance.takeConnection();
+        try (Statement statement = connection.createStatement()) {
+            for (String state : initState) {
+                statement.addBatch(state);
+            }
+            statement.executeBatch();
+        } catch (SQLException e) {
+            throw new ConnectionPoolException("Init SQL script error", e);
         }
     }
 }

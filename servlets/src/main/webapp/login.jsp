@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Трехколоночный макет</title>
-    <link href="${pageContext.request.contextPath}/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <div id="container">

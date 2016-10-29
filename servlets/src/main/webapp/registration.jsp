@@ -26,7 +26,6 @@
             <input type="password" name="password" value=""><br/>
             <input type="submit" value="Зарегистрироваться">
         </form>
-
     </div>
     <div id="footer">&copy; Василий Бобков</div>
 </div>
