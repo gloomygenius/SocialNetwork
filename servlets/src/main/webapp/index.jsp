@@ -25,7 +25,9 @@
             <li class="item5"><a href="#">Мероприятия</a></li>
         </ul>
     </div>
-    <div id="aside">Правая колонка</div>
+    <div id="aside">Правая колонка<br>
+        <a href="/logout">Выйти из аккаунта</a>
+    </div>
     <div id="content">Центральная колонка
         <a href="/home">Домой!</a></div>
     <div id="footer">&copy; Василий Бобков</div>

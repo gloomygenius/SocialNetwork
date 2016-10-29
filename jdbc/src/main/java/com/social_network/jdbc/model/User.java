@@ -11,5 +11,5 @@ public class User {
     private final String lastName;
     private final String email;
     private final String password;
-    private final boolean isMale;
+    private final boolean male;
 }

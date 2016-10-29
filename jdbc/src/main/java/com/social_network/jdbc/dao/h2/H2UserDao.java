@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class H2UserDao implements UserDao {
@@ -30,13 +31,12 @@ public class H2UserDao implements UserDao {
                 users.add(
                         new User(
                                 resultSet.getLong("id"),
-                                resultSet.getString("name"),
-                                resultSet.getString("name"),
-                                resultSet.getString("name"),
-                                resultSet.getString("name"),
-                                resultSet.getBoolean("caliber")
+                                resultSet.getString("firs_name"),
+                                resultSet.getString("last_name"),
+                                resultSet.getString("email"),
+                                resultSet.getString("password"),
+                                resultSet.getBoolean("male")
                         ));
-            // TODO: 29.10.2016 поля базы данных изменить
         } catch (SQLException | ConnectionPoolException e) {
             log.warn("Error requesting data from the database", e);
         }
@@ -53,5 +53,30 @@ public class H2UserDao implements UserDao {
     public User getByFirstAndSecondName() {
         // TODO: 29.10.2016 написать реализацию
         return null;
+    }
+
+    @Override
+    public Optional<User> isUserRegistered(String login, String password) {
+        Optional<User> user = Optional.empty();
+        try (Connection connection = connectionPool.takeConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT id, first_name, last_name, email, password, male  " +
+                             "FROM Users WHERE email='" + login + "'AND password='" + password + "'"
+             )) {
+            if (resultSet.next()) {
+                user = Optional.of(new User(
+                        resultSet.getLong("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getBoolean("male")
+                ));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            log.warn("Error requesting data from the database", e);
+        }
+        return user;
     }
 }
