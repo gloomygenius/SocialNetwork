@@ -1,4 +1,4 @@
-package ConnectionPool;
+package com.social_network.jdbc.connection_pool;
 
 import java.sql.*;
 import java.util.Map;

@@ -1,3 +1,4 @@
+import com.social_network.core.PropertiesReader;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

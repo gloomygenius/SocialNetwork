@@ -1,3 +1,5 @@
+package com.social_network.core;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;

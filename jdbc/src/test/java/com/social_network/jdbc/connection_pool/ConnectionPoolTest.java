@@ -1,4 +1,4 @@
-package ConnectionPool;
+package com.social_network.jdbc.connection_pool;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class ConnectionPoolTest {
 
     @BeforeClass
     public static void createConnectionPoolTest() throws ConnectionPoolException {
-        ConnectionPool.create("src/main/resources/db.properties");
+        ConnectionPool.create("src/test/resources/db.properties");
         connectionPool = ConnectionPool.getInstance();
         connectionPool.initPoolData();
     }

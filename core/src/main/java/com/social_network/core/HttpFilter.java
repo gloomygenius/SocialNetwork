@@ -1,4 +1,4 @@
-package com.epam.socialnetwork.core;
+package com.social_network.core;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

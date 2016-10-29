@@ -1,4 +1,4 @@
-package ConnectionPool;
+package com.social_network.jdbc.connection_pool;
 
 
 import lombok.Getter;
@@ -57,7 +57,7 @@ public class ConnectionPool {
                 connectionQueue.add(pooledConnection);
             }
         } catch (SQLException e) {
-            throw new ConnectionPoolException("SQLException in ConnectionPool", e);
+            throw new ConnectionPoolException("SQLException in connection_pool", e);
         } catch (ClassNotFoundException e) {
             throw new ConnectionPoolException(
                     "Can't find database driver class", e);
