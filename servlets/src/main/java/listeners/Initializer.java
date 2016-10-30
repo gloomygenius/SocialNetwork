@@ -3,8 +3,8 @@ package listeners;
 import com.social_network.jdbc.connection_pool.ConnectionPool;
 import com.social_network.jdbc.connection_pool.ConnectionPoolException;
 import com.social_network.jdbc.dao.h2.H2UserDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebListener;
 public class Initializer implements ServletContextListener {
     public static final String USER_DAO = "userDao";
 
-    private static Logger log = LoggerFactory.getLogger(Initializer.class);
+    private static final Logger log = LogManager.getLogger(Initializer.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

@@ -5,8 +5,8 @@ import com.social_network.jdbc.connection_pool.ConnectionPoolException;
 import com.social_network.jdbc.dao.UserDao;
 import com.social_network.jdbc.model.User;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class H2UserDao implements UserDao {
-    private Logger log = LoggerFactory.getLogger(H2UserDao.class);
+    private Logger log = LogManager.getLogger(H2UserDao.class);
     private final ConnectionPool connectionPool;
 
     @Override
