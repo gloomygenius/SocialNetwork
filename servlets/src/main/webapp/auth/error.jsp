@@ -11,8 +11,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Ошибка авторизации</title>
-    <link href="style.css" rel="stylesheet" type="text/css" >
-    <meta http-equiv="Refresh" content="2; URL=/login.jsp">
+    <link href="../style.css" rel="stylesheet" type="text/css" >
+    <meta http-equiv="Refresh" content="2; URL=/auth/login.jsp">
 </head>
 <body>
 <div id="container">

@@ -26,7 +26,9 @@ public class H2UserDao implements UserDao {
         Collection<User> users = new HashSet<>();
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT id, name, caliber FROM Gun")) {
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT id, first_name, last_name, email, password, male FROM Users"
+             )) {
             while (resultSet.next())
                 users.add(
                         new User(
@@ -44,9 +46,27 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public User getById() {
-        // TODO: 29.10.2016 написать реализацию
-        return null;
+    public Optional<User> getById(long id) {
+        Optional<User> user = Optional.empty();
+        try (Connection connection = connectionPool.takeConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT id, first_name, last_name, email, password, male FROM Users WHERE id='" + id + "'"
+             )) {
+            if (resultSet.next()) {
+                user = Optional.of(new User(
+                        resultSet.getLong("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getBoolean("male")
+                ));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            log.warn("Error requesting data from the database", e);
+        }
+        return user;
     }
 
     @Override

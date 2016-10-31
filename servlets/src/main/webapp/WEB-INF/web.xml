@@ -24,4 +24,13 @@
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
+    <!--<servlet>
+        <display-name>PersonalPage</display-name>
+        <servlet-name>PersonalPage</servlet-name>
+        <jsp-file>personal_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>-->
 </web-app>

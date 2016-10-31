@@ -45,6 +45,7 @@ public class ConnectionPool {
     }
 
     public void initPoolData() throws ConnectionPoolException {
+        System.setProperty("file.encoding","UTF-8");
         try {
             Class.forName(driverName);
             givenAwayConQueue = new ArrayBlockingQueue<>(poolSize);

@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Страница авторизации</title>
-    <link href="style.css" rel="stylesheet" type="text/css" >
+    <link href="../style.css" rel="stylesheet" type="text/css" >
 </head>
 <body>
 <div id="container">
@@ -20,11 +20,12 @@
     <div id="aside">Правая колонка</div>
     <div id="content">
         Надо залогиниться! <br>
-        <form method="POST" action="/login">
+        <form method="POST" action="j_security_check">
             <input name="j_username" title="Login"/><br/>
             <input type="password" name="j_password" autocomplete="off" title="Password"/><br/>
             <input type="submit" value="submit"/>
-        </form>
+        </form><br>
+        <a href="/auth/registration.jsp">Зарегистрироваться</a>
     </div>
     <div id="footer">&copy; Василий Бобков</div>
 </div>

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="static security.SecurityFilter.USER_KEY" %>
+<%@ page import="com.social_network.jdbc.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Vasiliy
   Date: 27.10.2016
@@ -9,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Регистрация нового пользователя</title>
     <link href="/style.css" rel="stylesheet">
 </head>
@@ -19,6 +20,12 @@
     <div id="nav">Левая колонка</div>
     <div id="aside">Правая колонка</div>
     <div id="content">
+        <%
+            if (session.getAttribute(USER_KEY) != null) {%>
+            <p>Вы уже зарегистрированы!!!</p>
+        <%
+            }else{
+        %>
         <form action="UserRegistrator" method="post">
             <input type="hidden" name="command" value="forward">
             Enter login:<br/>
@@ -27,6 +34,9 @@
             <input type="password" name="password" value=""><br/>
             <input type="submit" value="Зарегистрироваться">
         </form>
+        <%
+            }
+        %>
     </div>
     <div id="footer">&copy; Василий Бобков</div>
 </div>
