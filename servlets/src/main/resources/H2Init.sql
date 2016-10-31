@@ -9,6 +9,8 @@ CREATE TABLE Users(
 INSERT INTO Users (first_name, last_name, email, password, male)
 VALUES ('Василий', 'Bobkov', 'admin@exam.com', '123456', TRUE);
 
+INSERT INTO Users (first_name, last_name, email, password, male)
+VALUES ('Иван', 'Иванов', 'user@exam.com', '123456', TRUE);
 -- CREATE TABLE Roles (
 --   email VARCHAR(255) NOT NULL,
 --   role  VARCHAR(15)  NOT NULL,

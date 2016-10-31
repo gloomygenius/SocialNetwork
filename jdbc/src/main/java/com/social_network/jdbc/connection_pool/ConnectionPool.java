@@ -45,7 +45,7 @@ public class ConnectionPool {
     }
 
     public void initPoolData() throws ConnectionPoolException {
-        System.setProperty("file.encoding","UTF-8");
+        System.setProperty("file.encoding", "UTF-8");
         try {
             Class.forName(driverName);
             givenAwayConQueue = new ArrayBlockingQueue<>(poolSize);
@@ -110,12 +110,12 @@ public class ConnectionPool {
         }
         String[] initState = new String(buf).split(";");
         // TODO: 29.10.2016 отрефакторить
-        Connection connection = instance.takeConnection();
-        try (Statement statement = connection.createStatement()) {
+
+        try (Connection connection = instance.takeConnection();
+             Statement statement = connection.createStatement()) {
             for (String state : initState) {
-                statement.addBatch(state);
+                statement.executeUpdate(state);
             }
-            statement.executeBatch();
         } catch (SQLException e) {
             throw new ConnectionPoolException("Init SQL script error", e);
         }

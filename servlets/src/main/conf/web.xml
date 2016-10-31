@@ -369,14 +369,33 @@
             <load-on-startup>5</load-on-startup>
         </servlet>
     -->
-    <servlet>
+    <!--<servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>controllers.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
+
+    <!--<servlet>
+        <servlet-name>Page</servlet-name>
+        <servlet-class>controllers.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>-->
+
+    <!--<servlet>
+        <display-name>PersonalPage</display-name>
+        <servlet-name>PersonalPage</servlet-name>
+        <jsp-file>pages/personal_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalPage</servlet-name>
+        <url-pattern>/pages</url-pattern>
+    </servlet-mapping>-->
 
     <!-- ================ Built In Servlet Mappings ========================= -->
 

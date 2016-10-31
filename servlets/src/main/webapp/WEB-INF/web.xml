@@ -5,14 +5,33 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!--<servlet>-->
-    <!--<servlet-name>Home</servlet-name>-->
-    <!--<servlet-class>Home</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>Home</servlet-name>-->
-    <!--<url-pattern>/home</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <!--<servlet>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>Home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/home</url-pattern>
+    </servlet-mapping>-->
+
+    <!--<servlet>
+        <display-name>personalPage</display-name>
+        <servlet-name>personalPage</servlet-name>
+        <jsp-file>/personal_page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>personalPage</servlet-name>
+        <url-pattern>/pages/*</url-pattern>
+    </servlet-mapping>-->
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controllers.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <display-name>UserRecorder</display-name>
@@ -24,13 +43,28 @@
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>
-        <display-name>PersonalPage</display-name>
-        <servlet-name>PersonalPage</servlet-name>
-        <jsp-file>personal_page.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>PersonalPage</servlet-name>
+
+
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>security.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
+        <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/pages/*</url-pattern>
+        <url-pattern>/auth</url-pattern>
+        <url-pattern>/j_security_check</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>idPageFilter</filter-name>
+        <filter-class>filters.IdPageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>idPageFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

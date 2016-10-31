@@ -1,6 +1,8 @@
 <%@ page import="static security.SecurityFilter.USER_KEY" %>
+<%@ page import="static filters.IdPageFilter.REF_PAGE" %>
 <%@ page import="com.social_network.jdbc.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +19,26 @@
         <%
             session = request.getSession();
             User user = (User) session.getAttribute(USER_KEY);
-            System.out.println(user.getFirstName());
+        %>
+        <%
+            User refUser = (User) session.getAttribute(REF_PAGE);
+            if (refUser==null) {
         %>
         <p>Добро пожаловать, <% out.print(user.getFirstName() +" "+ user.getLastName()); %><br>
         </p>
+        <%
+            }else {
+                if (refUser.getId()==0) out.print("Такого пользователя не существует");
+                else {
+                    out.print(refUser.getFirstName() +" "+ refUser.getLastName());
+                }
+
+        %>
+        <p></p>
+
+        <%
+            }
+        %>
     </div>
     <div id="footer">&copy; Василий Бобков</div>
 </div>

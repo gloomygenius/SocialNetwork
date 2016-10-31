@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,9 +16,6 @@ import java.util.Optional;
 
 import static listeners.Initializer.USER_DAO;
 
-@WebFilter(
-        urlPatterns = {"/", "/index.jsp", "/pages/*", "/auth", "/j_security_check"}
-)
 public class SecurityFilter implements HttpFilter {
     public static String USER_KEY = "key";
     private UserDao userDao;
