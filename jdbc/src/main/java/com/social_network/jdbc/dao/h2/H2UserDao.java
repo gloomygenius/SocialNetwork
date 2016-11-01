@@ -33,7 +33,7 @@ public class H2UserDao implements UserDao {
                 users.add(
                         new User(
                                 resultSet.getLong("id"),
-                                resultSet.getString("firs_name"),
+                                resultSet.getString("first_name"),
                                 resultSet.getString("last_name"),
                                 resultSet.getString("email"),
                                 resultSet.getString("password"),
@@ -98,5 +98,18 @@ public class H2UserDao implements UserDao {
             log.warn("Error requesting data from the database", e);
         }
         return user;
+    }
+
+    @Override
+    public void addNewUser(String firstName, String lastName, String email, String password, boolean male) {
+        try (Connection connection = connectionPool.takeConnection();
+             Statement statement = connection.createStatement()){
+            statement.executeUpdate("INSERT INTO Users (first_name, last_name, email, password, male) " +
+                    "VALUES ('"+firstName+"', "+lastName+"', "+email+"', "+password+"', "+male+");");
+        } catch (SQLException e) {
+            log.error("SQL error when new user add to db",e);
+        } catch (ConnectionPoolException e) {
+            log.error("CP error when new user add to db",e);
+        }
     }
 }

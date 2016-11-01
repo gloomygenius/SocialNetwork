@@ -11,4 +11,6 @@ public interface UserDao {
     User getByFirstAndSecondName();
 
     Optional<User> isUserRegistered(String login, String password);
+
+    void addNewUser(String firstName, String lastName, String email, String password, boolean male);
 }
