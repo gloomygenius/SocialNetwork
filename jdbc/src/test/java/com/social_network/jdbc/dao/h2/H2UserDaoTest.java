@@ -49,11 +49,13 @@ public class H2UserDaoTest {
         Optional<User> user = h2UserDao.isUserRegistered("admin@exam.com", String.valueOf(123456));
         assertTrue(user.isPresent());
         assertThat(user.get().getFirstName(),is("Василий"));
-        System.out.println(user.get().getFirstName());
     }
 
     @Test
     public void addNewUser() throws Exception {
-
+        H2UserDao h2UserDao = new H2UserDao(connectionPool);
+        h2UserDao.addNewUser("Иван","Иванов","ivan@ya.ru","qwerty",true);
+        Collection<User> users= h2UserDao.getAll();
+        assertTrue(users.contains(new User(2, "Иван","Иванов","ivan@ya.ru","qwerty",true)));
     }
 }

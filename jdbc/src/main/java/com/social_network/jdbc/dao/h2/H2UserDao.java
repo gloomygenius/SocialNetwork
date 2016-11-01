@@ -105,7 +105,7 @@ public class H2UserDao implements UserDao {
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement()){
             statement.executeUpdate("INSERT INTO Users (first_name, last_name, email, password, male) " +
-                    "VALUES ('"+firstName+"', "+lastName+"', "+email+"', "+password+"', "+male+");");
+                    "VALUES ('"+firstName+"', '"+lastName+"', '"+email+"', '"+password+"', "+male+");");
         } catch (SQLException e) {
             log.error("SQL error when new user add to db",e);
         } catch (ConnectionPoolException e) {
