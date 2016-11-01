@@ -1,5 +1,6 @@
 package listeners;
 
+import com.social_network.jdbc.SQLscriptExecuter;
 import com.social_network.jdbc.connection_pool.ConnectionPool;
 import com.social_network.jdbc.connection_pool.ConnectionPoolException;
 import com.social_network.jdbc.dao.h2.H2UserDao;
@@ -32,7 +33,7 @@ public class Initializer implements ServletContextListener {
         }
 
         try {
-            connectionPool.initSqlData(pathToDbConfig + "H2Init.sql");
+            SQLscriptExecuter.initSqlData(pathToDbConfig + "H2Init.sql");
             log.info("SQL initialization has done successfully");
         } catch (ConnectionPoolException e) {
             log.error("Error in SQL initialization", e);

@@ -2,6 +2,7 @@
 <%@ page import="static filters.IdPageFilter.REF_PAGE" %>
 <%@ page import="com.social_network.jdbc.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
             User refUser = (User) session.getAttribute(REF_PAGE);
             if (refUser==null) {
         %>
-        <p>Добро пожаловать, <% out.print(user.getFirstName() +" "+ user.getLastName()); %><br>
+        <p>Добро пожаловать, ${user.getFirstName()} ${user.getLastName()}<br>
         </p>
         <%
             }else {

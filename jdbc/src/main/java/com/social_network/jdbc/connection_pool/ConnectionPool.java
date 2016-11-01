@@ -98,26 +98,4 @@ public class ConnectionPool {
             ((PooledConnection) connection).reallyClose();
         }
     }
-
-    public void initSqlData(String pathToInitSQL) throws ConnectionPoolException {
-        File file = new File(pathToInitSQL);
-        char[] buf = new char[(int) file.length()];
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
-            //noinspection ResultOfMethodCallIgnored
-            reader.read(buf);
-        } catch (IOException e) {
-            throw new ConnectionPoolException("Init SQL script error", e);
-        }
-        String[] initState = new String(buf).split(";");
-        // TODO: 29.10.2016 отрефакторить
-
-        try (Connection connection = instance.takeConnection();
-             Statement statement = connection.createStatement()) {
-            for (String state : initState) {
-                statement.executeUpdate(state);
-            }
-        } catch (SQLException e) {
-            throw new ConnectionPoolException("Init SQL script error", e);
-        }
-    }
 }
