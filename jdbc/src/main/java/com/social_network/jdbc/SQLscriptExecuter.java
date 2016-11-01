@@ -2,6 +2,8 @@ package com.social_network.jdbc;
 
 import com.social_network.jdbc.connection_pool.ConnectionPool;
 import com.social_network.jdbc.connection_pool.ConnectionPoolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.sql.Connection;
@@ -9,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class SQLscriptExecuter {
-    public static void initSqlData(String pathToInitSQL) throws ConnectionPoolException {
+    private static Logger log = LogManager.getLogger(SQLscriptExecuter.class);
+
+    public static void initSqlData(String pathToInitSQL) {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         File file = new File(pathToInitSQL);
         char[] buf = new char[(int) file.length()];
@@ -17,7 +21,7 @@ public abstract class SQLscriptExecuter {
             //noinspection ResultOfMethodCallIgnored
             reader.read(buf);
         } catch (IOException e) {
-            throw new ConnectionPoolException("Init SQL script error", e);
+            log.fatal("Reading sql script file error", e);
         }
         String[] initState = new String(buf).split(";");
         // TODO: 29.10.2016 отрефакторить
@@ -28,7 +32,9 @@ public abstract class SQLscriptExecuter {
                 statement.executeUpdate(state);
             }
         } catch (SQLException e) {
-            throw new ConnectionPoolException("Init SQL script error", e);
+            log.fatal("Init SQL script error", e);
+        } catch (ConnectionPoolException e) {
+            log.fatal("Error in ConnectionPool when sql script was executed", e);
         }
     }
 }
