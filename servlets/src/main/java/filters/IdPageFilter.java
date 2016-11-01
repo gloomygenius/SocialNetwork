@@ -40,7 +40,7 @@ public class IdPageFilter implements HttpFilter {
         log.info("start id filter");
         Matcher matcher = pattern.matcher(request.getRequestURL());
         if (matcher.find()) {
-            log.info("id was found, put into session");
+            log.info("ID in url was found, put into session");
             int id = Integer.parseInt(matcher.group(1));
             HttpSession session = request.getSession(true);
             Optional<User> user = userDao.getById(id);
@@ -48,7 +48,7 @@ public class IdPageFilter implements HttpFilter {
                 session.setAttribute(REF_PAGE, user.get());
 
             else session.setAttribute(REF_PAGE,new User(0,"na","na","na","na",true));
-            log.info("forward to /page");
+            log.info("forward to personal page");
             request.getRequestDispatcher("/pages/personal_page.jsp").forward(request, response);
         }else
         chain.doFilter(request, response);
