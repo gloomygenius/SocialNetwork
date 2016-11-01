@@ -18,7 +18,6 @@ public class SetCharFilter implements HttpFilter {
 // чтение кодировки из запроса
 
         String encoding = request.getCharacterEncoding();
-        System.out.println(encoding);
 
 // установка UTF-8, если не установлена
 

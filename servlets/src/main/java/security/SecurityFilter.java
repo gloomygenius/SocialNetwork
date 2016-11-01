@@ -32,22 +32,21 @@ public class SecurityFilter implements HttpFilter {
         if (session.getAttribute(USER_KEY) != null)
             chain.doFilter(request, response);
         else {
-            log.info("Notauth Пришёл неавторизованный пользвоатель");
-            log.info("check Проверяем, логинится ли он...");
+            log.info("Start security filter");
             Map<String, String[]> parameterMap = request.getParameterMap();
             if (parameterMap.containsKey("j_password") && parameterMap.containsKey("j_username")) {
-                log.info("LogPasCheck да, он пришёл с логином и паролем, сейчас проверим...");
+                log.info("User try to login...");
                 Optional<User> authorize = authorize(parameterMap);
                 if (authorize.isPresent()) {
                     session.setAttribute(USER_KEY, authorize.get());
                     response.sendRedirect("/");
-                    log.info("Yes Да такой пользователь есть");
+                    log.info("Login success");
                 } else{
-                    log.info("No пользователь нет");
+                    log.info("Login fail");
                     request.getRequestDispatcher("/auth/error.jsp").forward(request, response);
                 }
             } else {
-                log.info("Redir чел просто зашёл, отправляем логиниться");
+                log.info("Redirecting to login page");
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/auth/login.jsp");
                 // TODO: 22/10/2016 посмотреть что можно сделать что бы не терять информацию о странице куда пользователь зашёл
                 requestDispatcher.forward(request, response);

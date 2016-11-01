@@ -29,16 +29,17 @@
                 <form action="/registration" method="post">
                     <fieldset>
                         <legend><fmt:message key="regform.legend"/></legend>
-                        <p><label for="first_name"><fmt:message key="regform.fname"/> <em>*</em></label>
-                            <input type="text" name="first_name"></p>
-                        <p><label for="last_name"><fmt:message key="regform.lname"/> <em>*</em></label>
-                            <input type="text" name="last_name"></p>
-                        <p><label for="email">E-mail </label><input type="email" name="email"></p>
-                        <p><label for="password"><fmt:message key="regform.password"/> <em>*</em></label>
-                            <input type="password" name="password"></p>
-                        <p><label for="gender"><fmt:message key="regform.gender"/> <em>*</em></label><br>
+                        <p><label><fmt:message key="regform.fname"/> <em>*</em>
+                            <input type="text" name="first_name"></label></p>
+                        <p><label><fmt:message key="regform.lname"/> <em>*</em>
+                            <input type="text" name="last_name"></label></p>
+                        <p><label>E-mail <input type="email" name="email"></label></p>
+                        <p><label><fmt:message key="regform.password"/> <em>*</em>
+                            <input type="password" name="password"></label></p>
+                        <p><label><fmt:message key="regform.gender"/> <em>*</em><br>
                             <input type="radio" name="gender" value="male" checked><fmt:message key="regform.male"/><br>
                             <input type="radio" name="gender" value="female"><fmt:message key="regform.female"/><br>
+                        </label>
                         </p>
                     </fieldset>
                     <p><input type="submit" value="<fmt:message key="regform.button"/>"></p>

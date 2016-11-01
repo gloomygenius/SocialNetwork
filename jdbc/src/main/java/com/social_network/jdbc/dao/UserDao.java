@@ -1,7 +1,9 @@
 package com.social_network.jdbc.dao;
 
+import com.social_network.jdbc.connection_pool.ConnectionPoolException;
 import com.social_network.jdbc.model.User;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
 

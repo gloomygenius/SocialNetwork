@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static security.SecurityFilter.USER_KEY;
+
 public class Logout extends HttpServlet {
 
     @Override
@@ -20,8 +22,8 @@ public class Logout extends HttpServlet {
 
     private void requestProcess(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("key") != null) {
-            session.removeAttribute("key");
+        if (session.getAttribute(USER_KEY) != null) {
+            session.removeAttribute(USER_KEY);
         }
         try {
             response.sendRedirect("/index.jsp");
