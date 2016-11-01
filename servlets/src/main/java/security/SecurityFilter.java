@@ -17,7 +17,7 @@ import java.util.Optional;
 import static listeners.Initializer.USER_DAO;
 
 public class SecurityFilter implements HttpFilter {
-    public static String USER_KEY = "key";
+    public static String USER_KEY = "currentUser";
     private UserDao userDao;
     private static final Logger log = LogManager.getLogger(SecurityFilter.class);
     @Override

@@ -14,7 +14,7 @@
 <html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Главная страница</title>
+    <title><fmt:message key="title.mainpage"/></title>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -37,7 +37,7 @@
     </div>
     <div id="content">Добро пожаловать!</div>
     <div id="footer">
-        <p>Версия сайта (site version):<br>
+        <p>Язык сайта (site language):<br>
             <a href="/?language=ru_RU">Русский</a> | <a href="/?language=en_US">English</a> <br></p>
         &copy; <fmt:message key="copyright"/>
     </div>
