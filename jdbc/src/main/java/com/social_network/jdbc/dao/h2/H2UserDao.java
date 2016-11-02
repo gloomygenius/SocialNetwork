@@ -32,7 +32,7 @@ public class H2UserDao implements UserDao {
             while (resultSet.next())
                 users.add(
                         new User(
-                                resultSet.getLong("id"),
+                                resultSet.getInt("id"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name"),
                                 resultSet.getString("email"),
@@ -55,7 +55,7 @@ public class H2UserDao implements UserDao {
              )) {
             if (resultSet.next()) {
                 user = Optional.of(new User(
-                        resultSet.getLong("id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("email"),
@@ -86,7 +86,7 @@ public class H2UserDao implements UserDao {
              )) {
             if (resultSet.next()) {
                 user = Optional.of(new User(
-                        resultSet.getLong("id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("email"),

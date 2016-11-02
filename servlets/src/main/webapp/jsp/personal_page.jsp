@@ -6,6 +6,7 @@
 <c:set var="currentUser" scope="page" value="${sessionScope.currentUser}"/>
 <c:set var="refUser" scope="page" value="${sessionScope.referencePage}"/>
 
+
 <c:choose>
     <c:when test="${refUser.id eq 0}">
         <%--This user does not exist--%>
@@ -17,6 +18,8 @@
         <c:set scope="page" var="lastName" value="${refUser.lastName}"/>
     </c:otherwise>
 </c:choose>
+
+<c:set var="userInfo" scope="page" value="${sessionScope.userInfo}"/>
 
 <!DOCTYPE html>
 <html>
@@ -39,30 +42,38 @@
                 <div class="fio">
                     <p>${firstName} ${lastName}</p>
                 </div>
-                <div class="block_inf">
-                    <div class="f_col">День рождения:</div>
-                    <div class="s_col"></div>
-                </div>
-                <div class="block_inf">
-                    <div class="f_col">Город:</div>
-                    <div class="s_col"></div>
-                </div>
-                <div class="block_inf">
-                    <div class="f_col">Место учёбы:</div>
-                    <div class="s_col"></div>
-                </div>
-                <div class="block_inf">
-                    <div class="f_col">Отряд:</div>
-                    <div class="s_col"></div>
-                </div>
-                <div class="block_inf">
-                    <div class="f_col">Должность:</div>
-                    <div class="s_col"></div>
-                </div>
-                <div class="block_inf">
-                    <div class="f_col">Сезоны:</div>
-                    <div class="s_col"></div>
-                </div>
+                <c:choose>
+                    <c:when test="${userInfo.isPresent()}">
+                        <c:set scope="page" var="info" value="${userInfo.get()}"/>
+                        <div class="block_inf">
+                            <div class="f_col">День рождения:</div>
+                            <div class="s_col"><c:out value="${info.bithday}"/></div>
+                        </div>
+                        <div class="block_inf">
+                            <div class="f_col">Город:</div>
+                            <div class="s_col"><c:out value="${info.city}"/></div>
+                        </div>
+                        <div class="block_inf">
+                            <div class="f_col">Место учёбы:</div>
+                            <div class="s_col"><c:out value="${info.university}"/></div>
+                        </div>
+                        <div class="block_inf">
+                            <div class="f_col">Отряд:</div>
+                            <div class="s_col"><c:out value="${info.team}"/></div>
+                        </div>
+                        <div class="block_inf">
+                            <div class="f_col">Должность:</div>
+                            <div class="s_col"><c:out value="${info.position}"/></div>
+                        </div>
+                        <div class="block_inf">
+                            <div class="f_col">Сезоны:</div>
+                            <div class="s_col">В рзработке</div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Дополнительной информации о пользователе нет</p>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

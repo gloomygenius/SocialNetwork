@@ -1,7 +1,10 @@
 package filters;
 
 import com.social_network.core.HttpFilter;
+import com.social_network.jdbc.connection_pool.ConnectionPool;
 import com.social_network.jdbc.dao.UserDao;
+import com.social_network.jdbc.dao.UserInfoDao;
+import com.social_network.jdbc.dao.h2.H2UserInfo;
 import com.social_network.jdbc.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +26,7 @@ import static security.SecurityFilter.USER_KEY;
 
 
 public class IdPageFilter implements HttpFilter {
+    private static final String USER_INFO = "userInfo";
     private UserDao userDao;
     private Pattern pattern;
     public final static String REF_PAGE = "referencePage";
@@ -47,14 +51,21 @@ public class IdPageFilter implements HttpFilter {
                 log.info("ID in url was found, put into session");
                 int id = Integer.parseInt(matcher.group(1));
                 Optional<User> refUser = userDao.getById(id);
-                if (refUser.isPresent())
+                if (refUser.isPresent()) {
                     session.setAttribute(REF_PAGE, refUser.get());
-
-                else session.setAttribute(REF_PAGE, new User(0, "na", "na", "na", "na", true));
+                    putInfoAboutUser(session, refUser.get().getId());
+                } else {
+                    session.setAttribute(REF_PAGE, new User(0, "na", "na", "na", "na", true));
+                }
                 log.info("forward to personal page");
                 request.getRequestDispatcher("/jsp/personal_page.jsp").forward(request, response);
             }
         } else
             chain.doFilter(request, response);
+    }
+
+    private void putInfoAboutUser(HttpSession session, int id) {
+        UserInfoDao userInfoDao = new H2UserInfo(ConnectionPool.getInstance());
+        session.setAttribute(USER_INFO, userInfoDao.getById(id));
     }
 }
