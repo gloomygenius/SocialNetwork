@@ -47,23 +47,23 @@
                         <c:set scope="page" var="info" value="${userInfo.get()}"/>
                         <div class="block_inf">
                             <div class="f_col">День рождения:</div>
-                            <div class="s_col"><c:out value="${info.bithday}"/></div>
+                            <div class="s_col">${info.bithday}</div>
                         </div>
                         <div class="block_inf">
                             <div class="f_col">Город:</div>
-                            <div class="s_col"><c:out value="${info.city}"/></div>
+                            <div class="s_col">${info.city}</div>
                         </div>
                         <div class="block_inf">
                             <div class="f_col">Место учёбы:</div>
-                            <div class="s_col"><c:out value="${info.university}"/></div>
+                            <div class="s_col">${info.university}</div>
                         </div>
                         <div class="block_inf">
                             <div class="f_col">Отряд:</div>
-                            <div class="s_col"><c:out value="${info.team}"/></div>
+                            <div class="s_col">${info.team}</div>
                         </div>
                         <div class="block_inf">
                             <div class="f_col">Должность:</div>
-                            <div class="s_col"><c:out value="${info.position}"/></div>
+                            <div class="s_col">${info.position}</div>
                         </div>
                         <div class="block_inf">
                             <div class="f_col">Сезоны:</div>
