@@ -5,7 +5,6 @@ import com.social_network.jdbc.dao.UserDao;
 import com.social_network.jdbc.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import security.SecurityFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

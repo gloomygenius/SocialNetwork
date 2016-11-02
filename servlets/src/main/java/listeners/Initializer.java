@@ -33,6 +33,7 @@ public class Initializer implements ServletContextListener {
         }
 
         SQLscriptExecuter.initSqlData(pathToDbConfig + "H2Init.sql");
+        SQLscriptExecuter.initSqlData(pathToDbConfig + "usersH2Init.sql");
         log.info("SQL initialization has done successfully");
 
         context.setAttribute(USER_DAO, new H2UserDao(connectionPool));
