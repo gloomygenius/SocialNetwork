@@ -15,21 +15,21 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title><fmt:message key="title.mainpage"/></title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="container">
     <div id="header">[В]Отряде</div>
     <div id="nav">
         <ul class="menu">
-            <li class="item1"><a href="/id<%
+            <li class="mypage"><a href="/id<%
                 User user = (User) session.getAttribute(USER_KEY);
                 out.print(String.valueOf(user.getId()));
             %>"><fmt:message key="menu.mypage"/> </a></li>
-            <li class="item2"><a href="#"><fmt:message key="menu.messages"/></a></li>
-            <li class="item3"><a href="#"><fmt:message key="menu.friends"/></a></li>
-            <li class="item4"><a href="#"><fmt:message key="menu.myteam"/></a></li>
-            <li class="item5"><a href="#"><fmt:message key="menu.events"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.messages"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.friends"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.myteam"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.events"/></a></li>
         </ul>
     </div>
     <div id="aside">Правая колонка<br>

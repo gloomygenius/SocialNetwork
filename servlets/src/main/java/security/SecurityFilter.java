@@ -38,16 +38,16 @@ public class SecurityFilter implements HttpFilter {
                 log.info("User try to login...");
                 Optional<User> authorize = authorize(parameterMap);
                 if (authorize.isPresent()) {
+                    log.info("Login success");
                     session.setAttribute(USER_KEY, authorize.get());
                     response.sendRedirect("/");
-                    log.info("Login success");
                 } else{
                     log.info("Login fail");
-                    request.getRequestDispatcher("/auth/error.jsp").forward(request, response);
+                    request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
                 }
             } else {
                 log.info("Redirecting to login page");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/auth/login.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/login.jsp");
                 // TODO: 22/10/2016 посмотреть что можно сделать что бы не терять информацию о странице куда пользователь зашёл
                 requestDispatcher.forward(request, response);
             }
