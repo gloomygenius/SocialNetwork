@@ -26,7 +26,7 @@ public class Logout extends HttpServlet {
             session.removeAttribute(USER_KEY);
         }
         try {
-            response.sendRedirect("/index.jsp");
+            response.sendRedirect("/");
         } catch (IOException e) {
             e.printStackTrace();
             // TODO: 29.10.2016 log

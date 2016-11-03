@@ -22,10 +22,9 @@
     <div id="header">[В]Отряде</div>
     <div id="nav">
         <ul class="menu">
-            <li class="mypage"><a href="/id<%
-                User user = (User) session.getAttribute(USER_KEY);
-                out.print(String.valueOf(user.getId()));
-            %>"><fmt:message key="menu.mypage"/> </a></li>
+            <li class="mypage"><a href="/id${currentUser.id}">
+                <fmt:message key="menu.mypage"/> </a>
+            </li>
             <li class="mypage"><a href="#"><fmt:message key="menu.messages"/></a></li>
             <li class="mypage"><a href="#"><fmt:message key="menu.friends"/></a></li>
             <li class="mypage"><a href="#"><fmt:message key="menu.myteam"/></a></li>

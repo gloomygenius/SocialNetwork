@@ -13,7 +13,8 @@
     <div id="nav">Левая колонка</div>
     <div id="aside">Правая колонка</div>
     <div id="content">
-        Ошибочка!
+        Ошибочка!<br>
+        <a href="/">На главную</a>
     </div>
     <div id="footer">&copy; Василий Бобков</div>
 </div>

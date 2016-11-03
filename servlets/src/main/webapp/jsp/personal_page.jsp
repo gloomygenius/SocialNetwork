@@ -1,6 +1,5 @@
 <%@ page import="static security.SecurityFilter.USER_KEY" %>
 <%@ page import="static filters.IdPageFilter.REF_PAGE" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -9,10 +8,8 @@
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="text"/>
-
 <c:set var="currentUser" scope="page" value="${sessionScope.currentUser}"/>
 <c:set var="refUser" scope="page" value="${sessionScope.referencePage}"/>
-
 
 <c:choose>
     <c:when test="${refUser.id eq 0}">
@@ -28,7 +25,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Страница авторизации</title>
@@ -48,7 +45,9 @@
             <li class="mypage"><a href="#"><fmt:message key="menu.events"/></a></li>
         </ul>
     </div>
-    <div id="aside">Правая колонка</div>
+    <div id="aside">Правая колонка<br>
+        <a href="/logout"><fmt:message key="menu.logout"/></a>
+    </div>
     <div id="content">
         <div id="avatar">
             <img src="/img/default_ava.png" alt="avatar"/>
@@ -92,7 +91,11 @@
             </div>
         </div>
     </div>
-    <div id="footer">&copy; Василий Бобков</div>
+    <div id="footer">
+        <p>Язык сайта (site language):<br>
+            <a href="/?language=ru_RU">Русский</a> | <a href="/?language=en_US">English</a> <br></p>
+        &copy; <fmt:message key="copyright"/>
+    </div>
 </div>
 </body>
 </html>

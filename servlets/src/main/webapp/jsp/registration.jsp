@@ -21,12 +21,11 @@
     <div id="aside">Правая колонка</div>
     <div id="content">
         <c:choose>
-            <c:when test="${sessionScope.currentUser}.equals(\"\")">
+            <c:when test="${not empty sessionScope.currentUser}">
                 <p>Вы уже зарегистрированы!!!</p>
             </c:when>
             <c:otherwise>
-                <p> ${sessionScope.currentUser} </p>
-                <form action="/registration" method="post">
+                <form action="/registration" method="post" accept-charset="UTF-8">
                     <fieldset>
                         <legend><fmt:message key="regform.legend"/></legend>
                         <p><label><fmt:message key="regform.fname"/> <em>*</em>

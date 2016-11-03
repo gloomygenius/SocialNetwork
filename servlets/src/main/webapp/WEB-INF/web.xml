@@ -80,13 +80,15 @@
     </filter-mapping>
 
     <filter-mapping>
-        <filter-name>idPageFilter</filter-name>
+        <filter-name>setCharFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <filter-mapping>
-        <filter-name>setCharFilter</filter-name>
+        <filter-name>idPageFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
 
 </web-app>
