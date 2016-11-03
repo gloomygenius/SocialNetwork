@@ -1,7 +1,14 @@
 <%@ page import="static security.SecurityFilter.USER_KEY" %>
 <%@ page import="static filters.IdPageFilter.REF_PAGE" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 
 <c:set var="currentUser" scope="page" value="${sessionScope.currentUser}"/>
 <c:set var="refUser" scope="page" value="${sessionScope.referencePage}"/>
@@ -19,8 +26,7 @@
     </c:otherwise>
 </c:choose>
 
-<c:set var="userInfo" scope="page" value="${sessionScope.userInfo}"/>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +37,17 @@
 <body>
 <div id="container">
     <div id="header">[В]Отряде</div>
-    <div id="nav">Левая колонка</div>
+    <div id="nav">
+        <ul class="menu">
+            <li class="mypage"><a href="/id${currentUser.id}">
+                <fmt:message key="menu.mypage"/> </a>
+            </li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.messages"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.friends"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.myteam"/></a></li>
+            <li class="mypage"><a href="#"><fmt:message key="menu.events"/></a></li>
+        </ul>
+    </div>
     <div id="aside">Правая колонка</div>
     <div id="content">
         <div id="avatar">
@@ -42,38 +58,37 @@
                 <div class="fio">
                     <p>${firstName} ${lastName}</p>
                 </div>
-                <c:choose>
-                    <c:when test="${userInfo.isPresent()}">
-                        <c:set scope="page" var="info" value="${userInfo.get()}"/>
-                        <div class="block_inf">
-                            <div class="f_col">День рождения:</div>
-                            <div class="s_col">${info.bithday}</div>
-                        </div>
-                        <div class="block_inf">
-                            <div class="f_col">Город:</div>
-                            <div class="s_col">${info.city}</div>
-                        </div>
-                        <div class="block_inf">
-                            <div class="f_col">Место учёбы:</div>
-                            <div class="s_col">${info.university}</div>
-                        </div>
-                        <div class="block_inf">
-                            <div class="f_col">Отряд:</div>
-                            <div class="s_col">${info.team}</div>
-                        </div>
-                        <div class="block_inf">
-                            <div class="f_col">Должность:</div>
-                            <div class="s_col">${info.position}</div>
-                        </div>
-                        <div class="block_inf">
-                            <div class="f_col">Сезоны:</div>
-                            <div class="s_col">В рзработке</div>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <p>Дополнительной информации о пользователе нет</p>
-                    </c:otherwise>
-                </c:choose>
+                <c:if test="${not empty refUser.birthday}">
+                    <div class="block_inf">
+                        <div class="f_col">День рождения:</div>
+                        <div class="s_col">${refUser.birthday}</div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty refUser.city}">
+                    <div class="block_inf">
+                        <div class="f_col">Город:</div>
+                        <div class="s_col">${refUser.city}</div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty refUser.university}">
+                    <div class="block_inf">
+                        <div class="f_col">Место учёбы:</div>
+                        <div class="s_col">${refUser.university}</div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty refUser.team}">
+                    <div class="block_inf">
+                        <div class="f_col">Отряд:</div>
+                        <div class="s_col">${refUser.team}</div>
+                    </div>
+                </c:if>
+
+                <c:if test="${not empty refUser.position}">
+                    <div class="block_inf">
+                        <div class="f_col">Должность:</div>
+                        <div class="s_col">${refUser.position}</div>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

@@ -4,7 +4,12 @@ CREATE TABLE Users (
   last_name  VARCHAR(255) NOT NULL,
   email      VARCHAR(255) NOT NULL UNIQUE,
   password   VARCHAR(255) NOT NULL,
-  male       BOOLEAN      NOT NULL
+  male       BOOLEAN      NOT NULL,
+  birthday   DATE,
+  city       VARCHAR(25),
+  university VARCHAR(50),
+  team       VARCHAR(25),
+  position   VARCHAR(25),
 );
 
 CREATE TABLE Roles (
@@ -15,13 +20,13 @@ CREATE TABLE Roles (
 );
 
 CREATE TABLE Info (
-  id   INT PRIMARY KEY AUTO_INCREMENT ,
-  user_id INT,
-  birthday DATE,
-  city VARCHAR(25),
+  id         INT PRIMARY KEY AUTO_INCREMENT,
+  user_id    INT,
+  birthday   DATE,
+  city       VARCHAR(25),
   university VARCHAR(50),
-  team VARCHAR(25),
-  position VARCHAR(25),
+  team       VARCHAR(25),
+  position   VARCHAR(25),
   FOREIGN KEY (user_id) REFERENCES Users (id)
 );
 --

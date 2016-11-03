@@ -8,10 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,18 +28,11 @@ public class H2UserDao implements UserDao {
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(
-                     "SELECT id, first_name, last_name, email, password, male FROM Users"
+                     "SELECT id, first_name, last_name, email, password, male, birthday, city, university," +
+                             " team, position FROM Users"
              )) {
             while (resultSet.next())
-                users.add(
-                        new User(
-                                resultSet.getInt("id"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name"),
-                                resultSet.getString("email"),
-                                resultSet.getString("password"),
-                                resultSet.getBoolean("male")
-                        ));
+                users.add(createUserFromResultSet(resultSet));
         } catch (SQLException | ConnectionPoolException e) {
             log.warn("Error requesting data from the database", e);
         }
@@ -51,17 +45,11 @@ public class H2UserDao implements UserDao {
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(
-                     "SELECT id, first_name, last_name, email, password, male FROM Users WHERE id='" + id + "'"
+                     "SELECT id, first_name, last_name, email, password, male, birthday, city, university, " +
+                             "team, position FROM Users WHERE id='" + id + "'"
              )) {
             if (resultSet.next()) {
-                user = Optional.of(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getBoolean("male")
-                ));
+                user = Optional.of(createUserFromResultSet(resultSet));
             }
         } catch (SQLException | ConnectionPoolException e) {
             log.warn("Error requesting data from the database", e);
@@ -81,18 +69,11 @@ public class H2UserDao implements UserDao {
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(
-                     "SELECT id, first_name, last_name, email, password, male  " +
-                             "FROM Users WHERE email='" + login + "'AND password='" + password + "'"
+                     "SELECT id, first_name, last_name, email, password, male, birthday, city, university, team, " +
+                             "position FROM Users WHERE email='" + login + "'AND password='" + password + "'"
              )) {
             if (resultSet.next()) {
-                user = Optional.of(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getBoolean("male")
-                ));
+                user = Optional.of(createUserFromResultSet(resultSet));
             }
         } catch (SQLException | ConnectionPoolException e) {
             log.warn("Error requesting data from the database", e);
@@ -101,7 +82,7 @@ public class H2UserDao implements UserDao {
     }
 
     @Override
-    public void addNewUser(String firstName, String lastName, String email, String password, boolean male){
+    public void addNewUser(String firstName, String lastName, String email, String password, boolean male) {
         try (Connection connection = connectionPool.takeConnection();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate("INSERT INTO Users (first_name, last_name, email, password, male) " +
@@ -109,5 +90,37 @@ public class H2UserDao implements UserDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private User createUserFromResultSet(ResultSet resultSet) {
+        User user = null;
+        try {
+            user = new User(
+                    resultSet.getInt("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),
+                    resultSet.getBoolean("male"),
+                    convertDateToLocalDate(resultSet.getDate("birthday")),
+                    //LocalDate.now(), // TODO: 03.11.2016  написать нормальную функцию даты
+                    resultSet.getString("city"),
+                    resultSet.getString("university"),
+                    resultSet.getString("team"),
+                    resultSet.getString("position")
+            );
+        } catch (SQLException e) {
+            log.error("Error of creating user from result set", e);
+        }
+        return user;
+    }
+
+    LocalDate convertDateToLocalDate(Date date) {
+        if (date==null) return null;
+        LocalDate localDate =
+                Instant.ofEpochMilli(date.getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+        return localDate;
     }
 }

@@ -29,6 +29,6 @@ public class SQLscriptExecuterTest {
         SQLscriptExecuter.initSqlData("src/test/resources/H2Init.sql");
         H2UserDao h2UserDao = new H2UserDao(connectionPool);
         Collection<User> users = h2UserDao.getAll();
-        assertTrue(users.contains(new User(1, "Василий", "Бобков", "admin@exam.com", "123456", true)));
+        assertTrue(users.contains(new User(1, "Василий", "Бобков", "admin@exam.com", "123456", true,null,null,null,null,null)));
     }
 }
